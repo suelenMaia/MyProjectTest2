@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class RespostaRA : MonoBehaviour {
-    RaycastHit hit;
+    
     Ray ray;
     int score = 0;
-    
+    string imgName;
     // Use this for initialization
     void Start () {
         
@@ -16,12 +16,13 @@ public class RespostaRA : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
+        RaycastHit hit;
+        
         if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log(" you clicked on ");
+            imgName = hit.transform.name;
 
-            if (hit.collider.gameObject.name == "Cube")
+            if (imgName == "Cube")
             {
                 score++;
                 //persiste o score durante o jogo, é usado na próxima cena para exibir o barco com os danos
@@ -32,9 +33,9 @@ public class RespostaRA : MonoBehaviour {
             }
             else
             {
-                if(hit.collider.gameObject.name == "Sphere")
+                if(imgName == "Sphere")
                 {
-                    score = 0;
+                    score++;
                     SceneManager.LoadScene("Resultado");
                 }
             }
