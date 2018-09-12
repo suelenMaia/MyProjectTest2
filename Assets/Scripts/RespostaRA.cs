@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class RespostaRA : MonoBehaviour {
     RaycastHit hit;
     Ray ray;
-    int qtdErro = 1;
+    int score = 0;
     
     // Use this for initialization
     void Start () {
@@ -23,25 +23,23 @@ public class RespostaRA : MonoBehaviour {
 
             if (hit.collider.gameObject.name == "Cube")
             {
-                qtdErro++;
-                SceneManager.LoadScene("Resultado");                
+                score++;
+                //persiste o score durante o jogo, é usado na próxima cena para exibir o barco com os danos
+                //Fonte:https://stackoverflow.com/questions/22862932/keeping-scores-in-unity-and-pass-to-next-scene
+                PlayerPrefs.SetInt("Score", score);
+                SceneManager.LoadScene("Resultado");    
+                
             }
-            //else
-            //{
-            //    if(hit.collider.gameObject.name == "Sphere")
-            //    {
-            //        qtdErro = 0;
-            //        SceneManager.LoadScene("Resultado");
-            //    }
-            //}
+            else
+            {
+                if(hit.collider.gameObject.name == "Sphere")
+                {
+                    score = 0;
+                    SceneManager.LoadScene("Resultado");
+                }
+            }
         }
 
     }
-    
-    public int getScore()
-    {
-        return qtdErro;
-    }
- 
 
 }
