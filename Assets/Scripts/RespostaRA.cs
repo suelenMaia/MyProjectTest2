@@ -10,7 +10,7 @@ public class RespostaRA : MonoBehaviour {
     string imgName;
     // Use this for initialization
     void Start () {
-        
+        score = PlayerPrefs.GetInt("Score");
     }
 	
 	// Update is called once per frame
@@ -24,6 +24,7 @@ public class RespostaRA : MonoBehaviour {
 
             if (imgName == "Cube")
             {
+                
                 score++;
                 //persiste o score durante o jogo, é usado na próxima cena para exibir o barco com os danos
                 //Fonte:https://stackoverflow.com/questions/22862932/keeping-scores-in-unity-and-pass-to-next-scene
@@ -35,8 +36,10 @@ public class RespostaRA : MonoBehaviour {
             {
                 if(imgName == "Sphere")
                 {
+                    
                     score++;
                     SceneManager.LoadScene("Resultado");
+                    PlayerPrefs.SetInt("Score", score);
                 }
             }
         }
