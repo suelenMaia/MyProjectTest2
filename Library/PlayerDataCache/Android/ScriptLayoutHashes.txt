@@ -2,8 +2,8 @@ Android
 PlayerPath?
 C:/Users/Suelen/Documents/UnityProjectsTest/MyProjectTest2/appAndroid.apk
 SceneListBegin?
-Assets/Scenes/Questao1.unity
-Assets/Scenes/Resposta1.unity
+Assets/Scenes/Questao.unity
+Assets/Scenes/Resposta.unity
 Assets/Scenes/Resultado.unity
 SceneListEnd?
 c422dd62785a6d0afa870fbd111886ce Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret

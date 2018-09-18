@@ -6,44 +6,67 @@ using UnityEngine.SceneManagement;
 public class RespostaRA : MonoBehaviour {
     
     Ray ray;
-    int score = 0;
+    int scoreErro = 0, scoreAcerto = 0, numQuestao = 0;
     string imgName;
     // Use this for initialization
     void Start () {
-        score = PlayerPrefs.GetInt("Score");
+        scoreErro = PlayerPrefs.GetInt("ScoreErro");
+        scoreAcerto = PlayerPrefs.GetInt("ScoreAcerto");
+        numQuestao = PlayerPrefs.GetInt("NumQuestao");
     }
 	
 	// Update is called once per frame
 	void Update () {
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        
-        if (Physics.Raycast(ray, out hit))
+        if(Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
         {
-            imgName = hit.transform.name;
+            ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            RaycastHit hit;
 
-            if (imgName == "Cube")
+            if (Physics.Raycast(ray, out hit))
             {
-                
-                score++;
-                //persiste o score durante o jogo, é usado na próxima cena para exibir o barco com os danos
-                //Fonte:https://stackoverflow.com/questions/22862932/keeping-scores-in-unity-and-pass-to-next-scene
-                PlayerPrefs.SetInt("Score", score);
-                SceneManager.LoadScene("Resultado");    
-                
-            }
-            else
-            {
-                if(imgName == "Sphere")
+                imgName = hit.transform.name;
+                Debug.Log(imgName);
+
+                if (imgName == "Cube")
                 {
-                    
-                    score++;
+                    scoreErro++;
+                    //persiste o score durante o jogo, é usado na próxima cena para exibir o barco com os danos
+                    //Fonte:https://stackoverflow.com/questions/22862932/keeping-scores-in-unity-and-pass-to-next-scene
+                    PlayerPrefs.SetInt("ScoreErro", scoreErro);
                     SceneManager.LoadScene("Resultado");
-                    PlayerPrefs.SetInt("Score", score);
+                }
+                else
+                {
+                    if (imgName == "Sphere")
+                    {
+                        scoreErro++;
+                        PlayerPrefs.SetInt("ScoreErro", scoreErro);
+                        SceneManager.LoadScene("Resultado");
+                    }
+                    else
+                    {
+                        scoreAcerto++;
+
+                        if (numQuestao == 3)
+                        {
+                            numQuestao = 0;
+                            PlayerPrefs.SetInt("NumQuestao", numQuestao);
+                        }
+                        else
+                        {
+                            numQuestao++;
+                        }
+
+                        if (scoreErro > 0)
+                        {
+                            scoreErro--;
+                            PlayerPrefs.SetInt("ScoreErro", scoreErro);
+                        }
+                        PlayerPrefs.SetInt("ScoreAcerto", scoreAcerto);
+                        SceneManager.LoadScene("Resultado");
+                    }
                 }
             }
         }
-
     }
-
 }
