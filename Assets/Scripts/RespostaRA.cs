@@ -27,45 +27,38 @@ public class RespostaRA : MonoBehaviour {
                 imgName = hit.transform.name;
                 Debug.Log(imgName);
 
-                if (imgName == "Cube")
+                if(imgName == "Cylinder")
+                {
+                    scoreAcerto++;
+
+                    if (numQuestao == 3)
+                    {
+                        numQuestao = 0;
+                        PlayerPrefs.SetInt("NumQuestao", numQuestao);
+                    }
+                    else
+                    {
+                        numQuestao++;
+                        PlayerPrefs.SetInt("NumQuestao", numQuestao);
+                    }
+
+                    if (scoreErro > 0)
+                    {
+                        scoreErro--;
+                        PlayerPrefs.SetInt("ScoreErro", scoreErro);
+                    }
+                    PlayerPrefs.SetInt("ScoreAcerto", scoreAcerto);
+                    SceneManager.LoadScene("Resultado");
+                }
+                else
                 {
                     scoreErro++;
                     //persiste o score durante o jogo, é usado na próxima cena para exibir o barco com os danos
                     //Fonte:https://stackoverflow.com/questions/22862932/keeping-scores-in-unity-and-pass-to-next-scene
                     PlayerPrefs.SetInt("ScoreErro", scoreErro);
                     SceneManager.LoadScene("Resultado");
-                }
-                else
-                {
-                    if (imgName == "Sphere")
-                    {
-                        scoreErro++;
-                        PlayerPrefs.SetInt("ScoreErro", scoreErro);
-                        SceneManager.LoadScene("Resultado");
-                    }
-                    else
-                    {
-                        scoreAcerto++;
 
-                        if (numQuestao == 3)
-                        {
-                            numQuestao = 0;
-                            PlayerPrefs.SetInt("NumQuestao", numQuestao);
-                        }
-                        else
-                        {
-                            numQuestao++;
-                        }
-
-                        if (scoreErro > 0)
-                        {
-                            scoreErro--;
-                            PlayerPrefs.SetInt("ScoreErro", scoreErro);
-                        }
-                        PlayerPrefs.SetInt("ScoreAcerto", scoreAcerto);
-                        SceneManager.LoadScene("Resultado");
-                    }
-                }
+                } 
             }
         }
     }

@@ -11,12 +11,13 @@ public class ControllerQuestion : MonoBehaviour
     public Text txtQuestao, lblTitulo;
     string JsonDataString;
     string[] questoes, respostas;
-    int numQuestao, nivel = 1;
+    int numQuestao, nivel = 1, scoreErro;
     // Use this for initialization
     void Start ()
     {
        
         numQuestao = PlayerPrefs.GetInt("NumQuestao");
+        scoreErro = PlayerPrefs.GetInt("ScoreErro");
         if (numQuestao == 0)
         {
             PlayerPrefs.SetInt("NumQuestao", numQuestao+1);
@@ -47,7 +48,7 @@ public class ControllerQuestion : MonoBehaviour
     private IEnumerator GetQuestion()
     {
         
-        string url = "http://172.20.10.5/api.php?action=returnQuestion";
+        string url = "http://192.168.137.1/api.php?action=returnQuestion";
         using (UnityWebRequest www = UnityWebRequest.Get(url))
         {
             yield return www.SendWebRequest();
@@ -91,7 +92,7 @@ public class ControllerQuestion : MonoBehaviour
                         }
                         else
                         {
-                            if(numQuestao == 3)
+                            if(numQuestao == 3 && scoreErro == 3)
                             {
                                 txtQuestao.text = questoes[2];
                                 lblTitulo.text = "Questão Motivadora";
