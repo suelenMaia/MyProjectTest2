@@ -22,4 +22,5 @@ public class Question
 {
     public string descricao;
     public string imagem;
+    public string numNivel;
 }

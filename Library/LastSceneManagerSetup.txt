@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Resposta1.unity
+- path: Assets/Scenes/Questao.unity
   isLoaded: 1
   isActive: 1
