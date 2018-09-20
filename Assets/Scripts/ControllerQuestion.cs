@@ -8,34 +8,31 @@ using UnityEngine.SceneManagement;
 public class ControllerQuestion : MonoBehaviour
 {
     //public GameObject[] panel;
-    public Text txtQuestao, lblTitulo;
+    public Text txtQuestao, lblTitulo, txtScore, txtNivel;
     string JsonDataString;
     string[] questoes, respostas;
-    int numQuestao, nivel = 1, scoreErro;
+    int numQuestao=0, nivel = 0, scoreErro, scoreAcerto = 0;
     // Use this for initialization
     void Start ()
     {
-       
         numQuestao = PlayerPrefs.GetInt("NumQuestao");
         scoreErro = PlayerPrefs.GetInt("ScoreErro");
+        scoreAcerto = PlayerPrefs.GetInt("ScoreAcerto");
+        nivel = PlayerPrefs.GetInt("Nivel");
+        txtScore.text = scoreAcerto+" / 2";
         if (numQuestao == 0)
         {
-            PlayerPrefs.SetInt("NumQuestao", numQuestao+1);
-            StartCoroutine(GetQuestion());
+            numQuestao++;
+            PlayerPrefs.SetInt("NumQuestao", numQuestao);
         }
-        else
+        if(nivel == 0)
         {
-            StartCoroutine(GetQuestion());
+            nivel++;
+            PlayerPrefs.SetInt("Nivel", nivel);
         }
-        
-        
-        //panel[0].SetActive(false);
-        //panel[1].SetActive(false);
-        //panel[2].SetActive(false);
+        txtNivel.text = nivel + " / 2";
 
-        
-        
-        //nivel = PlayerPrefs.GetInt("Nivel");
+        StartCoroutine(GetQuestion());
     }
 
     // Update is called once per frame
@@ -73,6 +70,10 @@ public class ControllerQuestion : MonoBehaviour
                             questoes[i] = entities[i].descricao;
                             //respostas[i] = entities[i].imagem;
                         }
+                        else
+                        {
+                            Debug.Log("Sem questões para o nível");
+                        }
                     }
                     if(numQuestao == 1)
                     {
@@ -81,26 +82,19 @@ public class ControllerQuestion : MonoBehaviour
                         PlayerPrefs.SetInt("NumQuestao", numQuestao);
                         //PlayerPrefs.SetString("RespCerta", respostas[0]);
                     }
-                    else
+                    else if (numQuestao == 2)
                     {
-                        if (numQuestao == 2)
-                        {
-                            txtQuestao.text = questoes[1];
-                            lblTitulo.text = "Questão 2";
-                            PlayerPrefs.SetInt("NumQuestao", numQuestao);
-                            //PlayerPrefs.SetString("RespCerta", respostas[1]);
-                        }
-                        else
-                        {
-                            if(numQuestao == 3 && scoreErro == 3)
-                            {
-                                txtQuestao.text = questoes[2];
-                                lblTitulo.text = "Questão Motivadora";
-                                PlayerPrefs.SetInt("NumQuestao", numQuestao);
-                                //PlayerPrefs.SetString("RespCerta", respostas[2]);
-                            }
-                            
-                        }
+                        txtQuestao.text = questoes[1];
+                        lblTitulo.text = "Questão 2";
+                        PlayerPrefs.SetInt("NumQuestao", numQuestao);
+                        //PlayerPrefs.SetString("RespCerta", respostas[1]);   
+                    }
+                    else if (numQuestao == 3 && scoreErro == 3)
+                    {
+                        txtQuestao.text = questoes[2];
+                        lblTitulo.text = "Questão Motivadora";
+                        PlayerPrefs.SetInt("NumQuestao", numQuestao);
+                        //PlayerPrefs.SetString("RespCerta", respostas[2]);
                     }
                 }
             }  

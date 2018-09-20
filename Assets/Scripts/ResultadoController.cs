@@ -61,6 +61,7 @@ public class ResultadoController : MonoBehaviour {
                 PlayerPrefs.DeleteKey("ScoreErro");
                 PlayerPrefs.DeleteKey("ScoreAcerto");
                 PlayerPrefs.DeleteKey("NumQuestao");
+                PlayerPrefs.DeleteKey("Nivel");
                 SceneManager.LoadScene("Questao");
                 break;
         }

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class RespostaRA : MonoBehaviour {
     
     Ray ray;
-    int scoreErro = 0, scoreAcerto = 0, numQuestao = 0;
+    int scoreErro = 0, scoreAcerto = 0, numQuestao = 0, nivel;
     string imgName;
     // Use this for initialization
     void Start () {
@@ -36,12 +36,20 @@ public class RespostaRA : MonoBehaviour {
                         numQuestao = 0;
                         PlayerPrefs.SetInt("NumQuestao", numQuestao);
                     }
-                    else
+                    else if (numQuestao < 2)
                     {
                         numQuestao++;
                         PlayerPrefs.SetInt("NumQuestao", numQuestao);
+                        
+                        
                     }
-
+                    else
+                    {
+                        nivel++;
+                        numQuestao = 0;
+                        PlayerPrefs.SetInt("NumQuestao", numQuestao);
+                        PlayerPrefs.SetInt("Nivel", nivel);
+                    }
                     if (scoreErro > 0)
                     {
                         scoreErro--;
