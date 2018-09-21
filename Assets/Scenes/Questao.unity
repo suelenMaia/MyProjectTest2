@@ -508,6 +508,7 @@ MonoBehaviour:
   txtQuestao: {fileID: 274229340}
   lblTitulo: {fileID: 1599926186}
   txtScore: {fileID: 334997729}
+  txtNivel: {fileID: 642640351}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

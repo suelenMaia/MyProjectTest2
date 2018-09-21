@@ -31,32 +31,37 @@ public class RespostaRA : MonoBehaviour {
                 {
                     scoreAcerto++;
 
-                    if (numQuestao == 3)
-                    {
-                        numQuestao = 0;
-                        PlayerPrefs.SetInt("NumQuestao", numQuestao);
-                    }
-                    else if (numQuestao < 2)
-                    {
-                        numQuestao++;
-                        PlayerPrefs.SetInt("NumQuestao", numQuestao);
-                        
-                        
-                    }
-                    else
-                    {
-                        nivel++;
-                        numQuestao = 0;
-                        PlayerPrefs.SetInt("NumQuestao", numQuestao);
-                        PlayerPrefs.SetInt("Nivel", nivel);
-                    }
                     if (scoreErro > 0)
                     {
                         scoreErro--;
                         PlayerPrefs.SetInt("ScoreErro", scoreErro);
                     }
-                    PlayerPrefs.SetInt("ScoreAcerto", scoreAcerto);
-                    SceneManager.LoadScene("Resultado");
+
+                    if (numQuestao == 3)
+                    {
+                        numQuestao = 0;
+                        PlayerPrefs.SetInt("NumQuestao", numQuestao);
+                        PlayerPrefs.SetInt("ScoreAcerto", scoreAcerto);
+                        SceneManager.LoadScene("Resultado");
+                    }
+                    else if (numQuestao < 2)
+                    {
+                        numQuestao++;
+                        PlayerPrefs.SetInt("NumQuestao", numQuestao);
+                        PlayerPrefs.SetInt("ScoreAcerto", scoreAcerto);
+                        SceneManager.LoadScene("Resultado");
+
+                    }
+                    else
+                    {
+                        nivel++;
+                        numQuestao = 0;
+                        scoreErro = 0;
+                        PlayerPrefs.SetInt("ScoreErro", scoreErro);
+                        PlayerPrefs.SetInt("NumQuestao", numQuestao);
+                        PlayerPrefs.SetInt("Nivel", nivel);
+                        SceneManager.LoadScene("PassagemNivel");
+                    }
                 }
                 else
                 {

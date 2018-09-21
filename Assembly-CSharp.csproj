@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\imageTouth.cs" />
     <Compile Include="Assets\Scripts\JsonHelper.cs" />
     <Compile Include="Assets\Scripts\Panel.cs" />
+    <Compile Include="Assets\Scripts\PassagemNivel.cs" />
     <Compile Include="Assets\Scripts\RespostaRA.cs" />
     <Compile Include="Assets\Scripts\ResultadoController.cs" />
     <Compile Include="Assets\Scripts\SpawnScript.cs" />
