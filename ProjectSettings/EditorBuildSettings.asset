@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TesteAsset.unity
     guid: 7ebda142c1f600f408989eab58e9eeb7
+  - enabled: 1
+    path: Assets/Scenes/PassagemNivel.unity
+    guid: c8ddffb098857b74ba5e16de8cacb5fc
   m_configObjects: {}

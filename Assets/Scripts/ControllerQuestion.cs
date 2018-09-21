@@ -25,7 +25,7 @@ public class ControllerQuestion : MonoBehaviour
             numQuestao++;
             PlayerPrefs.SetInt("NumQuestao", numQuestao);
         }
-        if(nivel == 0)
+        if (nivel == 0)
         {
             nivel++;
             PlayerPrefs.SetInt("Nivel", nivel);

@@ -13,6 +13,7 @@ public class RespostaRA : MonoBehaviour {
         scoreErro = PlayerPrefs.GetInt("ScoreErro");
         scoreAcerto = PlayerPrefs.GetInt("ScoreAcerto");
         numQuestao = PlayerPrefs.GetInt("NumQuestao");
+        nivel = PlayerPrefs.GetInt("Nivel");
     }
 	
 	// Update is called once per frame
@@ -60,6 +61,7 @@ public class RespostaRA : MonoBehaviour {
                         PlayerPrefs.SetInt("ScoreErro", scoreErro);
                         PlayerPrefs.SetInt("NumQuestao", numQuestao);
                         PlayerPrefs.SetInt("Nivel", nivel);
+                        PlayerPrefs.SetInt("ScoreAcerto", scoreAcerto);
                         SceneManager.LoadScene("PassagemNivel");
                     }
                 }
