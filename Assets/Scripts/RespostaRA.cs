@@ -7,7 +7,7 @@ public class RespostaRA : MonoBehaviour {
     
     Ray ray;
     int scoreErro = 0, scoreAcerto = 0, numQuestao = 0, nivel;
-    string imgName;
+    //string imgName;
     // Use this for initialization
     void Start () {
         scoreErro = PlayerPrefs.GetInt("ScoreErro");
@@ -25,56 +25,64 @@ public class RespostaRA : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit))
             {
-                imgName = hit.transform.name;
-                Debug.Log(imgName);
+                string nomeImg = hit.transform.name;
+                Debug.Log(nomeImg);
+                VerificaResposta(nomeImg);
 
-                if(imgName == "Cylinder")
-                {
-                    scoreAcerto++;
-
-                    if (scoreErro > 0)
-                    {
-                        scoreErro--;
-                        PlayerPrefs.SetInt("ScoreErro", scoreErro);
-                    }
-
-                    if (numQuestao == 3)
-                    {
-                        numQuestao = 0;
-                        PlayerPrefs.SetInt("NumQuestao", numQuestao);
-                        PlayerPrefs.SetInt("ScoreAcerto", scoreAcerto);
-                        SceneManager.LoadScene("Resultado");
-                    }
-                    else if (numQuestao < 2)
-                    {
-                        numQuestao++;
-                        PlayerPrefs.SetInt("NumQuestao", numQuestao);
-                        PlayerPrefs.SetInt("ScoreAcerto", scoreAcerto);
-                        SceneManager.LoadScene("Resultado");
-
-                    }
-                    else
-                    {
-                        nivel++;
-                        numQuestao = 0;
-                        scoreErro = 0;
-                        PlayerPrefs.SetInt("ScoreErro", scoreErro);
-                        PlayerPrefs.SetInt("NumQuestao", numQuestao);
-                        PlayerPrefs.SetInt("Nivel", nivel);
-                        PlayerPrefs.SetInt("ScoreAcerto", scoreAcerto);
-                        SceneManager.LoadScene("PassagemNivel");
-                    }
-                }
-                else
-                {
-                    scoreErro++;
-                    //persiste o score durante o jogo, é usado na próxima cena para exibir o barco com os danos
-                    //Fonte:https://stackoverflow.com/questions/22862932/keeping-scores-in-unity-and-pass-to-next-scene
-                    PlayerPrefs.SetInt("ScoreErro", scoreErro);
-                    SceneManager.LoadScene("Resultado");
-
-                } 
+                
             }
         }
     }
+
+    public void VerificaResposta(string nomeImg)
+    {
+        if (nomeImg == "Cylinder")
+        {
+            scoreAcerto++;
+
+            if (scoreErro > 0)
+            {
+                scoreErro--;
+                PlayerPrefs.SetInt("ScoreErro", scoreErro);
+            }
+
+            if (numQuestao == 3)
+            {
+                numQuestao = 0;
+                PlayerPrefs.SetInt("NumQuestao", numQuestao);
+                PlayerPrefs.SetInt("ScoreAcerto", scoreAcerto);
+                SceneManager.LoadScene("Resultado");
+            }
+            else if (numQuestao < 2)
+            {
+                numQuestao++;
+                PlayerPrefs.SetInt("NumQuestao", numQuestao);
+                PlayerPrefs.SetInt("ScoreAcerto", scoreAcerto);
+                SceneManager.LoadScene("Resultado");
+
+            }
+            else
+            {
+                nivel++;
+                numQuestao = 0;
+                scoreErro = 0;
+                PlayerPrefs.SetInt("ScoreErro", scoreErro);
+                PlayerPrefs.SetInt("NumQuestao", numQuestao);
+                PlayerPrefs.SetInt("Nivel", nivel);
+                PlayerPrefs.SetInt("ScoreAcerto", scoreAcerto);
+                SceneManager.LoadScene("PassagemNivel");
+            }
+        }
+        else
+        {
+            scoreErro++;
+            //persiste o score durante o jogo, é usado na próxima cena para exibir o barco com os danos
+            //Fonte:https://stackoverflow.com/questions/22862932/keeping-scores-in-unity-and-pass-to-next-scene
+            PlayerPrefs.SetInt("ScoreErro", scoreErro);
+            SceneManager.LoadScene("Resultado");
+
+        }
+
+    }
+
 }

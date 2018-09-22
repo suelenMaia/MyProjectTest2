@@ -5,27 +5,50 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PassagemNivel : MonoBehaviour {
-    public Text txtNumNivel;
-    private int nivel, scoreAcerto;
+    public GameObject[] avatares;
+    public Text txtNumNivel, lblFeedback;
+    int nivel, scoreAcerto;
 	// Use this for initialization
 	void Start () {
-        //nivel = 2;
+        //nivel = 1;
         nivel = PlayerPrefs.GetInt("Nivel");
         scoreAcerto = PlayerPrefs.GetInt("ScoreAcerto");
-        txtNumNivel.text = nivel.ToString();
-	}
+        avatares[0].SetActive(false);
+        avatares[1].SetActive(false);
+        
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        StartCoroutine("SalvaDadosServidor");
+        //StartCoroutine("SalvaDadosServidor");
+        StartCoroutine("FormataCena");
 	}
 
-    IEnumerator SalvaDadosServidor()
+    public void SalvaDadosServidor()
     {
-        yield return new WaitForSeconds(3);
         scoreAcerto = 0;
         PlayerPrefs.SetInt("ScoreAcerto", scoreAcerto);
         PlayerPrefs.SetInt("Nivel", nivel);
-        SceneManager.LoadScene("Questao");
+    }
+    IEnumerator FormataCena()
+    {
+        if (nivel == 2)
+        {
+            txtNumNivel.text = nivel.ToString();
+            lblFeedback.text = "Parabéns Marujo!\nVocê passou para o nível";
+            avatares[0].SetActive(true);
+            SalvaDadosServidor();
+            yield return new WaitForSeconds(3);
+            SceneManager.LoadScene("Questao");
+        }
+        else if (nivel == 3)
+        {
+            //txtNumNivel.text = nivel.ToString();
+            lblFeedback.text = "Parabéns Marujo!\nVocê completou a missão";
+            avatares[1].SetActive(true);
+            SalvaDadosServidor();
+            yield return new WaitForSeconds(3);
+            SceneManager.LoadScene("Questao");
+        }
     }
 }
