@@ -10,7 +10,7 @@ public class PassagemNivel : MonoBehaviour {
     int nivel, scoreAcerto;
 	// Use this for initialization
 	void Start () {
-        //nivel = 1;
+        //nivel = 3;
         nivel = PlayerPrefs.GetInt("Nivel");
         scoreAcerto = PlayerPrefs.GetInt("ScoreAcerto");
         avatares[0].SetActive(false);
@@ -41,14 +41,15 @@ public class PassagemNivel : MonoBehaviour {
             yield return new WaitForSeconds(3);
             SceneManager.LoadScene("Questao");
         }
-        else if (nivel == 3)
+        else if (nivel > 2)
         {
-            //txtNumNivel.text = nivel.ToString();
             lblFeedback.text = "Parabéns Marujo!\nVocê completou a missão";
             avatares[1].SetActive(true);
             SalvaDadosServidor();
+            //nivel = 0;
+            //PlayerPrefs.SetInt("Nivel", nivel);
             yield return new WaitForSeconds(3);
-            SceneManager.LoadScene("Questao");
+            SceneManager.LoadScene("Resposta");
         }
     }
 }

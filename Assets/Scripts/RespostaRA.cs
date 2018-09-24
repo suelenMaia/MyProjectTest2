@@ -4,16 +4,28 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class RespostaRA : MonoBehaviour {
-    
+    public GameObject[] respostas;
     Ray ray;
     int scoreErro = 0, scoreAcerto = 0, numQuestao = 0, nivel;
     //string imgName;
     // Use this for initialization
     void Start () {
+        respostas[0].SetActive(false);
+        respostas[1].SetActive(false);
         scoreErro = PlayerPrefs.GetInt("ScoreErro");
         scoreAcerto = PlayerPrefs.GetInt("ScoreAcerto");
         numQuestao = PlayerPrefs.GetInt("NumQuestao");
         nivel = PlayerPrefs.GetInt("Nivel");
+        if (nivel > 2)
+        {
+           respostas[1].SetActive(true);
+            nivel = 0;
+            PlayerPrefs.SetInt("Nivel", nivel);
+        }
+        else
+        {
+            respostas[0].SetActive(true);
+        }
     }
 	
 	// Update is called once per frame

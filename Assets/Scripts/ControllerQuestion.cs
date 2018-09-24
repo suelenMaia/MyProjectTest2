@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class ControllerQuestion : MonoBehaviour
 {
-    //public GameObject[] panel;
+    public GameObject[] avatares;
     public Text txtQuestao, lblTitulo, txtScore, txtNivel;
     string JsonDataString;
     string[] questoes, respostas;
@@ -15,6 +15,8 @@ public class ControllerQuestion : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        avatares[0].SetActive(false);
+        avatares[1].SetActive(false);
         numQuestao = PlayerPrefs.GetInt("NumQuestao");
         scoreErro = PlayerPrefs.GetInt("ScoreErro");
         scoreAcerto = PlayerPrefs.GetInt("ScoreAcerto");
@@ -29,6 +31,15 @@ public class ControllerQuestion : MonoBehaviour
         {
             nivel++;
             PlayerPrefs.SetInt("Nivel", nivel);
+            avatares[0].SetActive(true);
+        }
+        else if (nivel == 2){
+            avatares[1].SetActive(true);
+            PlayerPrefs.SetInt("Nivel", nivel);
+        }
+        else
+        {
+            avatares[0].SetActive(true);
         }
         txtNivel.text = nivel + " / 2";
 
