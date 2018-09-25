@@ -85,6 +85,10 @@ public class RespostaRA : MonoBehaviour {
                 SceneManager.LoadScene("PassagemNivel");
             }
         }
+        else if (nomeImg == "chest_open")
+        {
+            SceneManager.LoadScene("Inicial");
+        }
         else
         {
             scoreErro++;

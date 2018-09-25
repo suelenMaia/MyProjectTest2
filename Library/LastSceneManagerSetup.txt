@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/PassagemNivel.unity
+- path: Assets/Scenes/Resposta.unity
   isLoaded: 1
   isActive: 1
