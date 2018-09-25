@@ -29,12 +29,14 @@ public class ApresentacaoController : MonoBehaviour {
     public IEnumerator InserirAluno(string nome, string senha, string turma)
     {
         WWWForm form = new WWWForm();
-        form.headers.Add("action", "insertNewStudent");
+        form.AddField("action", "insertNewStudent");
         form.AddField("nome", nome);
         form.AddField("senha", senha);
         form.AddField("turma", turma);
-
+        
+        
         UnityWebRequest www = UnityWebRequest.Post("http://localhost/apiInsert.php", form);
+        
         yield return www.SendWebRequest();
 
         if (www.error != null)
