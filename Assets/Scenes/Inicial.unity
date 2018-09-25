@@ -2100,6 +2100,17 @@ MonoBehaviour:
           m_StringArgument: Questao
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1861365023}
+        m_MethodName: GetSetText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1702839900
@@ -2272,7 +2283,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Option A
+  m_Text: 1A
 --- !u!222 &1752035718
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2366,6 +2377,7 @@ GameObject:
   - component: {fileID: 1861365020}
   - component: {fileID: 1861365019}
   - component: {fileID: 1861365022}
+  - component: {fileID: 1861365023}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2444,6 +2456,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c21167283538b45ac4c6cdf0d05a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1861365023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1861365018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dc6e681fde0514eb0841c48eea3f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputNome: {fileID: 2130094060}
+  inputSenha: {fileID: 923576465}
+  turma: {fileID: 1965613859}
 --- !u!1 &1964163744
 GameObject:
   m_ObjectHideFlags: 0
@@ -2609,11 +2635,11 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Option A
+    - m_Text: 1A
       m_Image: {fileID: 0}
-    - m_Text: Option B
+    - m_Text: 1B
       m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: 1C
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
