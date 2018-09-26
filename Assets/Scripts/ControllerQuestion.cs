@@ -56,7 +56,7 @@ public class ControllerQuestion : MonoBehaviour
     private IEnumerator GetQuestion()
     {
         
-        string url = "http://192.168.2.104/api.php?action=returnQuestion";
+        string url = "http://localhost/api.php?action=returnQuestion";
         using (UnityWebRequest www = UnityWebRequest.Get(url))
         {
             yield return www.SendWebRequest();
