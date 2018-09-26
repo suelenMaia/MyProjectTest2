@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ApresentacaoController : MonoBehaviour {
@@ -24,50 +25,61 @@ public class ApresentacaoController : MonoBehaviour {
         
         Debug.Log("Turma: "+txtturma);
         StartCoroutine(InserirAluno(txtnome, txtsenha, txtturma));
+        StartCoroutine(GetAluno(txtnome));
+        SceneManager.LoadScene("Questao");
+
     }
 
-    public IEnumerator InserirAluno(string nome, string senha, string turma)
+    private IEnumerator InserirAluno(string nome, string senha, string turma)
     {
+        string url = "http://localhost/apiInsert.php";
         List<IMultipartFormSection> form = new List<IMultipartFormSection>();
         string actionStr = "gambs=gamb&action=insertNewStudent&nome=" + nome + "&senha=" + senha + "&turma=" + turma + "&gambs1=gamb1";
         MultipartFormDataSection dataSection = new MultipartFormDataSection(actionStr);
         //Debug.Log("SECTION TYPE: " + dataSection.contentType);
         form.Add(dataSection);
 
-        UnityWebRequest www = UnityWebRequest.Post("http://localhost/apiInsert.php", form);
-        www.SetRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        yield return www.SendWebRequest();
-
-        if (www.isNetworkError || www.isHttpError)
+        using (UnityWebRequest www = UnityWebRequest.Post(url, form))
         {
-            Debug.Log(www.error);
+            www.SetRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            yield return www.SendWebRequest();
+            Debug.Log("antes do if de erro");
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log("no if de erro");
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log("Dados salvos no servidor");
+                
+            }
+
         }
-        else
+    }
+    private IEnumerator GetAluno(string nomeAluno)
+    {
+        string url = "http://localhost/api.php?action=getAluno&nomeAluno="+nomeAluno;
+        using (UnityWebRequest www = UnityWebRequest.Get(url))
         {
-            Debug.Log("Form uploaded "+ www.downloadHandler.text);
-            Debug.Log("Status code " + www.responseCode);
-            
+            yield return www.SendWebRequest();
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log(www.error);
+                //txtQuestao.text = "Sem conexão com o servidor";
+            }
+            else
+            {
+                if (www.isDone)
+                {
+                    Debug.Log("no if isDone do getAluno");
+                    string jsonResult = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);
+                    Debug.Log(jsonResult);
+                    Aluno[] entities = JsonHelper.getJsonArray<Aluno>(jsonResult);
+
+                    Debug.Log("Tamanho resp " + entities.Length);
+                }
+            }
         }
-
-        //WWWForm form = new WWWForm();
-        //form.AddField("action", "insertNewStudent");
-        //form.AddField("nome", nome);
-        //form.AddField("senha", senha);
-        //form.AddField("turma", turma);
-        //Debug.Log("***88"+form.data.ToString());
-        
-        //UnityWebRequest www = UnityWebRequest.Post("http://localhost/apiInsert.php", form);
-        
-        //yield return www.SendWebRequest();
-
-        //if (www.error != null)
-        //{
-        //    Debug.Log("Erro: " + www.error);
-        //}
-        //else
-        //{
-        //    Debug.Log("All OK");
-        //    Debug.Log("Text: " + www.downloadHandler.text);
-        //}
     }
 }

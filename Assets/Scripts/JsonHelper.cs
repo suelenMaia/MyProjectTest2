@@ -24,3 +24,11 @@ public class Question
     public string imagem;
     public string numNivel;
 }
+
+[System.Serializable]
+public class Aluno
+{
+    public string idAluno;
+    public string nomeAluno;
+    public string idTurma;
+}
